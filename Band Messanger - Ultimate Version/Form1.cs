@@ -15,11 +15,11 @@ namespace Band_Messanger___Ultimate_Version
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        ChromiumWebBrowser browser;
+        HakunaBrowser browser;
         public Form()
         {
             InitializeComponent();
-            browser = new ChromiumWebBrowser("https://band.us");
+            browser = new HakunaBrowser("https://google.com");
 
             this.panel1.Controls.Add(browser);
             this.Focus();
@@ -77,30 +77,14 @@ namespace Band_Messanger___Ultimate_Version
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             */
-
-            var task = browser.EvaluateScriptAsync(@"(function(){return document.getElementsByClassName('bandlogo')[0].outerHTML})()");
-
-            task.ContinueWith(t =>
-            {
-                
-                if (!t.IsFaulted)
-                {
-                    var response = t.Result;
-
-                    if (response.Success == true)
-                    {
-                        MessageBox.Show(response.Result.ToString());
-                    }
-                }
-                
-            });
-
+            browser.FindElement("#lst-ib", 0).Click();
             
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             browser.ShowDevTools();
+
         }
     }
 }
