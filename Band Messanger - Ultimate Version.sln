@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Band Messanger - Ultimate Version", "Band Messanger - Ultimate Version\Band Messanger - Ultimate Version.csproj", "{BB614AB8-1451-4178-ABD3-012D3CADF0CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Debug|x64.ActiveCfg = Debug|x64
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Debug|x64.Build.0 = Debug|x64
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Release|x64.ActiveCfg = Release|x64
+		{BB614AB8-1451-4178-ABD3-012D3CADF0CE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B22F94F-EE80-4BD9-859F-F7A822EA4217}
+	EndGlobalSection
+EndGlobal
