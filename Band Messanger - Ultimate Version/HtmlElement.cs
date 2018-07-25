@@ -17,6 +17,7 @@ namespace Band_Messanger___Ultimate_Version
         
         public string JsLandName { get; set; }
         public HakunaBrowser Browser { get; set; }
+        public bool IsTypeable { get; set; }
         
         public HtmlElement(string outerHTML, string tagName, Dictionary<string,string> properties, string innerHTML, bool isChecked, bool isDisable)
         {
@@ -26,6 +27,8 @@ namespace Band_Messanger___Ultimate_Version
             InnerHTML = innerHTML;
             IsDisable = isDisable;
             IsChecked = isChecked;
+
+            this.IsTypeable = ((TagName.Equals("input") && (Properties["type"].Equals("text") || Properties["type"].Equals("tel") || Properties["type"].Equals("email") || Properties["type"].Equals("password")))) || TagName.Equals("textarea");
         }
 
         public HtmlElement(string outerHTML, string tagName, Dictionary<string, string> properties, string innerHTML)
@@ -34,6 +37,8 @@ namespace Band_Messanger___Ultimate_Version
             TagName = tagName;
             Properties = properties;
             InnerHTML = innerHTML;
+
+            this.IsTypeable = ((TagName.Equals("input") && (Properties["type"].Equals("text") || Properties["type"].Equals("tel") || Properties["type"].Equals("email") || Properties["type"].Equals("password")))) || TagName.Equals("textarea");
         }
 
         public HtmlElement(string html)
@@ -44,6 +49,10 @@ namespace Band_Messanger___Ultimate_Version
             this.InnerHTML = element.InnerHTML;
             this.IsDisable = element.IsDisable;
             this.IsChecked = element.IsChecked;
+            
+            this.IsTypeable = ( (TagName.Equals("input") && (Properties["type"].Equals("text") || Properties["type"].Equals("tel") || Properties["type"].Equals("email")  || Properties["type"].Equals("password")))) || TagName.Equals("textarea");
+            //this.IsTypeable = true;
+
         }
 
         public override string ToString()
@@ -58,7 +67,17 @@ namespace Band_Messanger___Ultimate_Version
 
         public void SendKeys(string keys)
         {
-            
+            if (!IsTypeable)
+            {
+                throw new Exception(String.Format("HtmlElement::SendKeys : {0} is not typeable! {1}", TagName, OuterHTML));
+            }
+
+            Browser.SendKeys(JsLandName, keys);
+        }
+
+        public void ToggleDisabled()
+        {
+            Browser.ToggleDisabled(JsLandName);
         }
     }
 }

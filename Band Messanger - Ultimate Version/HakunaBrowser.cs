@@ -21,9 +21,16 @@ namespace Band_Messanger___Ultimate_Version
             this.ExecuteScriptAsync(script);
         }
 
+        public void ToggleDisabled(string jsLandName)
+        {
+            string script = String.Format("{0}.disabled = !{0}.disabled;", jsLandName);
+            this.ExecuteScriptAsync(script);
+        }
+
         public void SendKeys(string jsLandName, string keys)
         {
-            string script = String.Format("{0}.value = {1}", jsLandName, keys);
+            string script = String.Format("{0}.value = '{1}'", jsLandName, keys);
+            this.ExecuteScriptAsync(script);
         }
 
        public HtmlElement FindElement(string cssSelector, int nth = 0)
@@ -51,7 +58,7 @@ namespace Band_Messanger___Ultimate_Version
                 jsLandName += nth.ToString();
                 script = String.Format("{0} = document.getElementsByTagName({1}); (function(){{ return {2}.outerHTML }})();", jsLandName, cssSelector, jsLandName);
             }
-            System.Windows.Forms.MessageBox.Show(script);
+            
             var response = this.EvaluateScriptAsync(script).Result;
             element = HtmlParser.Parse(response.Result.ToString());
             element.JsLandName = jsLandName;

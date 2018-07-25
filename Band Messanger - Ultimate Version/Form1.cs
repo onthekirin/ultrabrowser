@@ -16,13 +16,24 @@ namespace Band_Messanger___Ultimate_Version
     public partial class Form : System.Windows.Forms.Form
     {
         HakunaBrowser browser;
+        Wait wait;
         public Form()
         {
             InitializeComponent();
-            browser = new HakunaBrowser("https://google.com");
+            CefSettings settings = new CefSettings();
+            settings.Locale = "ko";
+            settings.AcceptLanguageList = "ko";
+   
+            
 
+            Cef.Initialize(settings);
+            browser = new HakunaBrowser("https://band.us");
+            wait = new Wait(browser, 5);
             this.panel1.Controls.Add(browser);
             this.Focus();
+
+           
+
         }
 
         private void Form_KeyUp(object sender, KeyEventArgs e)
@@ -35,56 +46,21 @@ namespace Band_Messanger___Ultimate_Version
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*
-            // Step 01: create a simple html page (include jquery so we have access to json object
-            StringBuilder htmlPage = new StringBuilder();
-            htmlPage.AppendLine("");
-            htmlPage.AppendLine("");
-            htmlPage.AppendLine("");
-            htmlPage.AppendLine("");
-            htmlPage.AppendLine("Hello world 2");
-            htmlPage.AppendLine("");
+            
 
-            // Step 02: Load the Page
-            browser.LoadHtml(htmlPage.ToString(), "http://customrendering/");
-
-            // Step 03: Define and Execute some ad-hoc JS that returns an object back to C#
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("function tempFunction() {");
-            sb.AppendLine("     // create a JS object");
-            sb.AppendLine("     var person = {firstName:'John', lastName:'Maclaine', age:23, eyeColor:'blue'};");
-            sb.AppendLine("");
-            sb.AppendLine("     // Important: convert object to string before returning to C#");
-            sb.AppendLine("     return JSON.stringify(person);");
-            sb.AppendLine("}");
-            sb.AppendLine("tempFunction();");
-
-            var task = browser.EvaluateScriptAsync(sb.ToString());
-
-            task.ContinueWith(t =>
-            {
-                if (!t.IsFaulted)
-                {
-                    // Step 04: Recieve value from JS
-                    var response = t.Result;
-
-                    if (response.Success == true)
-                    {
-                        // Use JSON.net to convert to object;
-                        MessageBox.Show(response.Result.ToString());
-                    }
-                }
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            */
-            browser.FindElement("#lst-ib", 0).Click();
+            
+            browser.FindElement(".login", 0).Click();
+            wait.UntilElementExist(".text");
+            browser.FindElement(".text", 1).Click();
+            wait.UntilElementExist("#input_email");
+            browser.FindElement("#input_email").SendKeys("onthekirin@gmail.com");
+            browser.FindElement(".-confirm").ToggleDisabled();
             
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             browser.ShowDevTools();
-
         }
     }
 }
